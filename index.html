@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fênix Equipamentos e Produtos Automotivos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+        /* Imagem de fundo para o hero */
+        .hero-gradient {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('imagens/hero.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        /* Efeito de hover suave nos cards de produtos */
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        /* Animação do botão WhatsApp */
+        .whatsapp-float {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Estilos do Carrossel Simples */
+        .simple-carousel {
+            width: 100vw;
+            height: 50vh;
+            margin-left: calc(-50vw + 50%);
+            position: relative;
+        }
+        
+        .simple-carousel .swiper-slide {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .simple-carousel .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Overlay para informações do produto */
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem;
+            z-index: 10;
+        }
+        
+        /* Navegação do carrossel */
+        .simple-carousel .swiper-button-next,
+        .simple-carousel .swiper-button-prev {
+            color: white;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-top: -25px;
+        }
+        
+        .simple-carousel .swiper-button-next:after,
+        .simple-carousel .swiper-button-prev:after {
+            font-size: 20px;
+        }
+        
+        .simple-carousel .swiper-pagination-bullet {
+            background: white;
+            opacity: 0.7;
+        }
+        
+        .simple-carousel .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+        
+        /* Menu mobile */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-black shadow-lg fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-4 py-1">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="imagens/logo.png" alt="Fênix Logo" class="w-12 h-12 object-contain">
+                    <div>
+                        <h1 class="text-xl font-bold text-white">Fênix</h1>
+                        <p class="text-xs text-gray-300">Equipamentos Automotivos</p>
+                    </div>
+                </div>
+
+                <!-- Menu Desktop -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-blue-400 font-medium transition-colors">Home</a>
+                    <a href="#sobre" class="text-gray-300 hover:text-blue-400 font-medium transition-colors">Sobre</a>
+                    <a href="#produtos" class="text-gray-300 hover:text-blue-400 font-medium transition-colors">Produtos</a>
+                    <a href="#contato" class="text-gray-300 hover:text-blue-400 font-medium transition-colors">Contato</a>
+                </div>
+
+                <!-- WhatsApp Desktop -->
+                <div class="hidden md:block">
+                    <a href="https://wa.me/5511999999999" target="_blank" 
+                       class="text-white hover:text-green-400 transition-colors">
+                        <i class="fab fa-whatsapp text-4xl"></i>
+                    </a>
+                </div>
+
+                <!-- Menu Mobile Button -->
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Menu Mobile -->
+        <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-full h-full bg-white z-40 md:hidden">
+            <div class="flex justify-between items-center p-4 border-b">
+                <div class="flex items-center space-x-3">
+                    <img src="imagens/logo.png" alt="Fênix Logo" class="w-10 h-10 object-contain">
+                    <span class="font-bold text-gray-800">Fênix</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="p-4">
+                <a href="#home" class="block py-3 text-gray-700 border-b" onclick="toggleMobileMenu()">Home</a>
+                <a href="#sobre" class="block py-3 text-gray-700 border-b" onclick="toggleMobileMenu()">Sobre</a>
+                <a href="#produtos" class="block py-3 text-gray-700 border-b" onclick="toggleMobileMenu()">Produtos</a>
+                <a href="#contato" class="block py-3 text-gray-700 border-b" onclick="toggleMobileMenu()">Contato</a>
+                <a href="https://wa.me/5511999999999" target="_blank" 
+                   class="block mt-4 bg-green-500 text-white text-center py-3 rounded-lg">
+                    <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Carrossel Full Width -->
+    <section class="relative pt-16">
+        <div class="swiper simple-carousel">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 - Óleo Motor -->
+                <div class="swiper-slide">
+                    <img src="imagens/oleo.jpg" alt="Óleo Motor Premium">
+                    <div class="slide-overlay">
+                        <div class="container mx-auto px-4">
+                            <h4 class="text-3xl md:text-4xl font-bold mb-2">Óleo Motor Sintético</h4>
+                            <p class="text-xl text-gray-200 mb-4">Máxima proteção e performance para seu motor</p>
+                            <a href="https://wa.me/5511999999999" target="_blank" 
+                               class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Consultar Preço</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 - Bateria -->
+                <div class="swiper-slide">
+                    <img src="imagens/baterias.png" alt="Bateria Automotiva">
+                    <div class="slide-overlay">
+                        <div class="container mx-auto px-4">
+                            <h4 class="text-3xl md:text-4xl font-bold mb-2">Baterias Automotivas</h4>
+                            <p class="text-xl text-gray-200 mb-4">Alta durabilidade e confiabilidade para seu veículo</p>
+                            <a href="https://wa.me/5511999999999" target="_blank" 
+                               class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Consultar Preço</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 - EPIs -->
+                <div class="swiper-slide">
+                    <img src="imagens/epis.jpg" alt="EPIs Automotivos">
+                    <div class="slide-overlay">
+                        <div class="container mx-auto px-4">
+                            <h4 class="text-3xl md:text-4xl font-bold mb-2">EPIs Automotivos</h4>
+                            <p class="text-xl text-gray-200 mb-4">Equipamentos de proteção individual para sua segurança</p>
+                            <a href="https://wa.me/5511999999999" target="_blank" 
+                               class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Consultar Preço</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 4 - Filtros -->
+                <div class="swiper-slide">
+                    <img src="imagens/filtros.jpg" alt="Filtros Automotivos">
+                    <div class="slide-overlay">
+                        <div class="container mx-auto px-4">
+                            <h4 class="text-3xl md:text-4xl font-bold mb-2">Filtros Automotivos</h4>
+                            <p class="text-xl text-gray-200 mb-4">Filtros de ar, óleo e combustível para todos os veículos</p>
+                            <a href="https://wa.me/5511999999999" target="_blank" 
+                               class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Consultar Preço</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 5 - Pastilhas de Freio -->
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1200&h=600&fit=crop&crop=center" alt="Pastilhas de Freio">
+                    <div class="slide-overlay">
+                        <div class="container mx-auto px-4">
+                            <h4 class="text-3xl md:text-4xl font-bold mb-2">Sistema de Freios</h4>
+                            <p class="text-xl text-gray-200 mb-4">Pastilhas e discos para sua segurança</p>
+                            <a href="https://wa.me/5511999999999" target="_blank" 
+                               class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Consultar Preço</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navegação -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            
+            <!-- Paginação -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Barra de Produtos -->
+    <section class="bg-red-600 py-2">
+        <div class="container mx-auto px-4">
+            <!-- Mobile: Apenas ícones com tooltips -->
+            <div class="flex justify-center items-center gap-4 md:hidden text-white">
+                <div class="relative group">
+                    <i class="fas fa-oil-can text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
+                        Óleos e Lubrificantes
+                    </div>
+                </div>
+                <div class="relative group">
+                    <i class="fas fa-car-battery text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
+                        Baterias
+                    </div>
+                </div>
+                <div class="relative group">
+                    <i class="fas fa-hard-hat text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
+                        EPIs
+                    </div>
+                </div>
+                <div class="relative group">
+                    <i class="fas fa-cog text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
+                        Peças
+                    </div>
+                </div>
+                <div class="relative group">
+                    <i class="fas fa-tools text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
+                        Ferramentas
+                    </div>
+                </div>
+                <div class="relative group">
+                    <i class="fas fa-car-crash text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
+                        Freios
+                    </div>
+                </div>
+                <div class="relative group">
+                    <i class="fas fa-filter text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
+                        Filtros
+                    </div>
+                </div>
+                <div class="relative group">
+                    <i class="fas fa-car text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
+                        Acessórios
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desktop: Ícones com texto -->
+            <div class="hidden md:flex flex-wrap justify-center items-center gap-6 md:gap-8 text-white text-sm md:text-base">
+                <!-- Produto 1 -->
+                <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
+                    <i class="fas fa-oil-can text-lg"></i>
+                    <span class="font-medium">Óleos e Lubrificantes</span>
+                </div>
+                
+                <!-- Produto 2 -->
+                <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
+                    <i class="fas fa-car-battery text-lg"></i>
+                    <span class="font-medium">Baterias</span>
+                </div>
+                
+                <!-- Produto 3 -->
+                <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
+                    <i class="fas fa-hard-hat text-lg"></i>
+                    <span class="font-medium">EPIs</span>
+                </div>
+                
+                <!-- Produto 4 -->
+                <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
+                    <i class="fas fa-cog text-lg"></i>
+                    <span class="font-medium">Peças</span>
+                </div>
+                
+                <!-- Produto 5 -->
+                <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
+                    <i class="fas fa-tools text-lg"></i>
+                    <span class="font-medium">Ferramentas</span>
+                </div>
+                
+                <!-- Produto 6 -->
+                <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
+                    <i class="fas fa-car-crash text-lg"></i>
+                    <span class="font-medium">Freios</span>
+                </div>
+                
+                <!-- Produto 7 -->
+                <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
+                    <i class="fas fa-filter text-lg"></i>
+                    <span class="font-medium">Filtros</span>
+                </div>
+                
+                <!-- Produto 8 -->
+                <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
+                    <i class="fas fa-car text-lg"></i>
+                    <span class="font-medium">Acessórios</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient py-8 flex items-center">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <!-- Logo Centralizado -->
+                <div class="mb-4">
+                    <img src="imagens/logo.png" alt="Fênix Logo" class="w-32 h-32 md:w-40 md:h-40 mx-auto object-contain">
+                </div>
+                
+                <!-- Conteúdo Principal -->
+                <div class="text-white space-y-6 max-w-4xl mx-auto">
+                    <h2 class="text-2xl md:text-3xl font-bold leading-tight">
+                        Equipamentos e Produtos <span class="text-orange-300">Automotivos</span>
+                    </h2>
+                    <p class="text-xl md:text-2xl text-gray-300">
+                        Distribuidora Especializada em Postos de Gasolina e Lava Rápido. 
+                        Temos tudo em Produtos Automotivos, Equipamentos, EPIs, Peças e Acessórios para sua Rede de Postos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Produtos em Destaque -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-red-600 mb-4">Produtos em Destaque</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Produto 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 left-2 bg-black text-white px-2 py-1 text-xs font-bold rounded">
+                            15% OFF
+                        </div>
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Destaque/mangotes.png" alt="Kit Mangotes" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Kit com 5 Mangotes + Breakaway não reconectável 3/4" - Com Certificado Inmetro
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: DEF3214</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Destaque/bicomaximus.png" alt="Bico Maximus" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Bico de Abastecimento Automático 1/2 11AP Maximus - OPW
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: BICO-MAX</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Destaque/limpador.png" alt="Limpador" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Limpadores de Para Brisa Dyna
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: LIMP-PREM</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Destaque/pingadeira.png" alt="Pingadeira" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Pingadeira de Óleo com 7 Funis – Jactoil
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: PING-ANTI</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Destaque/superlube.png" alt="Super Lube" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Super Lub Loctite 200g Multiuso
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: SUPER-LUBE</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Bicos e Capas -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-red-600 mb-4">Bicos e Capas</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Produto 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs font-bold rounded">
+                            DESTAQUE
+                        </div>
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Bicos/bico.png" alt="Bico Padrão" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Bico de Abastecimento Automático 1/2 11AP Padrão - OPW
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: BICO-PAD-1/2</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Bicos/bicoazul.png" alt="Bico Azul" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Bico de Abastecimento Automático 1/2 11AP Azul - OPW
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: BICO-AZ-1/2</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Bicos/bicopreto.png" alt="Bico Preto" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Bico de Abastecimento Automático 1/2 11AP Preto - OPW
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: BICO-PT-1/2</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Bicos/bicomaximus.png" alt="Bico Maximus" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Bico de Abastecimento Automático 1/2 11AP Maximus - OPW
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: BICO-MAX-1/2</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Bicos/capabico.png" alt="Capa de Bico" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Capa Protetora Para Bicos de Abastecimento c/ suporte 3/4
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: CAPA-BICO-3/4</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Lava Rápido -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-red-600 mb-4">Lava Rápido</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Produto 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 text-xs font-bold rounded">
+                            DESTAQUE
+                        </div>
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Lava Rapido/kitcompleto.png" alt="Kit Completo" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Kit Lava Rápido Completo - Equipamentos
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: LR-KIT-COMP</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Lava Rapido/kitshampoo.png" alt="Kit Shampoo" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Kit Shampoo para Lava Rápido - Produtos
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: LR-KIT-SHAMPOO</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Lava Rapido/rodo.png" alt="Rodo" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Rodo Mop 25cm com Cabo De 50cm Bralimpia
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: ROD-MOP-25</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Lava Rapido/rodopista.png" alt="Rodo Pista" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Rodo de Pista 1m - Borracha Resistente
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: ROD-PISTA-1M</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Lava Rapido/vassourao.png" alt="Vassourão" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Vassourão para Lava Rápido - Cerdas Macias
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: VASS-LR</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Produtos Para o Posto -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-red-600 mb-4">Produtos Para o Posto</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Produto 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs font-bold rounded">
+                            DESTAQUE
+                        </div>
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Posto/arla.png" alt="ARLA 32" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Arla 32 Bioarla 20lts
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: ARLA-BIOARLA</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Posto/conexaoopw.png" alt="Conexão OPW" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Conexão Giratória 360º 3/4 Polegada – OPW
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: CONEX-OPW-360</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Posto/protetor.png" alt="Protetor" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Protetor de Bico de Abastecimento com Suporte de Mangueira
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: PROT-BICO-SUP</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Posto/proveta.png" alt="Proveta" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Proveta Graduada de 1000ml com Base de Polipropileno
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: PROV-1000-PP</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Posto/proveta2.png" alt="Proveta 2" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Proveta Certificada para Análise de Combustível RBC 7 Pontos
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: PROV-RBC-7</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Mangueiras e Conexões -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-red-600 mb-4">Mangueiras e Conexões</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Produto 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs font-bold rounded">
+                            DESTAQUE
+                        </div>
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Mangueiras/mangueira.png" alt="Mangueira" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Mangueira para Combustível 3/4 5M - Terminais em Alumínio – Hylik
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: MANG-3/4-5M</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Mangueiras/mangueiraabastecimento.png" alt="Mangueira Abastecimento" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Mangueira para Combustível 3/4 5M - Terminais em Alumínio - Continental / Goodyear
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: MANG-CONT-3/4</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Mangueiras/mangueiratranspower.png" alt="Mangueira Transpower" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Mangueira para Combustível 3/4 5M - Terminais em Alumínio - Transpower
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: MANG-TP-3/4</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Mangueiras/conexao.png" alt="Conexão" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Conexão Giratória 360º 3/4 Polegada - HLC
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: CONEX-HLC-3/4</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Mangueiras/valvula.png" alt="Válvula" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Válvula de Segurança Breakaway 3/4 Não Reconectável Certificado OPW
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: VAL-BREAK-3/4</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Itens para o Posto -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-red-600 mb-4">Itens para o Posto</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Produto 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs font-bold rounded">
+                            DESTAQUE
+                        </div>
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Itens Posto/densimetro.png" alt="Densímetro" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Densímetro para Analise de Combustível
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: DENS-ANALISE</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Itens Posto/pingadeira.png" alt="Pingadeira" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Pingadeira de Óleo com 7 Funis – Jactoil
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: PING-JACTOIL</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Itens Posto/protetorrespingo.png" alt="Protetor Respingo" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Protetor de Respingos / Bolacha para Bico de Abastecimento
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: PROT-BOLACHA</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Itens Posto/tampa.png" alt="Tampa" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Tampa de Câmara de Calçada 12 alumínio Zeppini
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: TAMPA-ZEPPINI</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Itens Posto/termomentro.png" alt="Termômetro" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Termômetro Ecológico para Derivados de Petróleo e Etanol INMETRO
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: TERM-INMETRO</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Produtos para o Carro -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-red-600 mb-4">Produtos para o Carro</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Produto 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs font-bold rounded">
+                            DESTAQUE
+                        </div>
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Carro/aditivo.png" alt="Aditivo" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Aditivos de Tanque 200ml Radibras
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: ADIT-RADIBRAS</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Carro/agua.png" alt="Água" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Água Desmineralizada Gitanes Litro
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: AGUA-GITANES</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Carro/fluidoradibras.png" alt="Fluido Radibras" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Fluido para Radiador RX-120 Radibras 1L
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: FLUID-RX120</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Carro/limpadorhipervisao.png" alt="Limpador Hipervisão" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Limpador Para-Brisa Hipervisão Antineblina 120ml
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: LIMP-ANTINEB</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Produtos Carro/superlube.png" alt="Superlube" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Super Lub Loctite 200g Multiuso
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: SUPER-LOCTITE</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Itens para o Carro -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-red-600 mb-4">Itens para o Carro</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Produto 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs font-bold rounded">
+                            DESTAQUE
+                        </div>
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Itens Carro/aditivoradibras.png" alt="Aditivo Radibras" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Aditivo Radibras - RX-600 FLEX / RX-601 GAS
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: ADIT-RAD</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Itens Carro/disco.png" alt="Disco" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Disco Tacógrafo 7 dias 125km VDO
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: DISCO-VDO</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Itens Carro/fluido.png" alt="Fluido" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Fluido de Freio Varga
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: FLUID-VARGA</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Itens Carro/galao.png" alt="Galão" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Galão para Combustível de 5 litros - Portaria do INMETRO 141-2019
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: GALAO-5L-INMETRO</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/Itens Carro/limpador.png" alt="Limpador" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Limpadores de Para Brisa Dyna
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: LIMP-DYNA</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Sobre a Fênix</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Há mais de 10 anos no mercado automotivo, oferecemos produtos de qualidade 
+                    e atendimento especializado para manter seu veículo sempre em perfeito estado.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-award text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Qualidade Garantida</h3>
+                    <p class="text-gray-600">Produtos de marcas reconhecidas com garantia total</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shipping-fast text-3xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Entrega Rápida</h3>
+                    <p class="text-gray-600">Entregamos em toda a região com agilidade</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-3xl text-orange-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Atendimento Especializado</h3>
+                    <p class="text-gray-600">Equipe técnica qualificada para orientá-lo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Produtos -->
+    <section id="produtos" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nossos Produtos</h2>
+                <p class="text-xl text-gray-600">
+                    Tudo que você precisa para manter seu veículo em perfeito estado
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Categoria 1 -->
+                <div class="product-card bg-white rounded-xl p-6 text-center shadow-lg">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-oil-can text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Óleos e Lubrificantes</h3>
+                    <p class="text-gray-600 mb-4">Óleos para motor, câmbio, direção hidráulica e freios</p>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
+                        Ver Produtos
+                    </button>
+                </div>
+
+                <!-- Categoria 2 -->
+                <div class="product-card bg-white rounded-xl p-6 text-center shadow-lg">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-car-battery text-3xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Baterias</h3>
+                    <p class="text-gray-600 mb-4">Baterias automotivas de alta durabilidade e performance</p>
+                    <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-colors">
+                        Ver Produtos
+                    </button>
+                </div>
+
+                <!-- Categoria 3 -->
+                <div class="product-card bg-white rounded-xl p-6 text-center shadow-lg">
+                    <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-cog text-3xl text-orange-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Peças e Componentes</h3>
+                    <p class="text-gray-600 mb-4">Peças originais e paralelas para todos os veículos</p>
+                    <button class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg transition-colors">
+                        Ver Produtos
+                    </button>
+                </div>
+
+                <!-- Categoria 4 -->
+                <div class="product-card bg-white rounded-xl p-6 text-center shadow-lg">
+                    <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-3xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Ferramentas</h3>
+                    <p class="text-gray-600 mb-4">Ferramentas profissionais para oficinas e uso doméstico</p>
+                    <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-colors">
+                        Ver Produtos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contato" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Entre em Contato</h2>
+                <p class="text-xl text-gray-600">
+                    Estamos prontos para atendê-lo. Fale conosco!
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fab fa-whatsapp text-xl text-green-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">WhatsApp</h3>
+                            <p class="text-gray-600">(11) 99999-9999</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-phone text-xl text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Telefone</h3>
+                            <p class="text-gray-600">(11) 3333-3333</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-envelope text-xl text-red-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">E-mail</h3>
+                            <p class="text-gray-600">contato@fenixautomotivos.com.br</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-map-marker-alt text-xl text-orange-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Endereço</h3>
+                            <p class="text-gray-600">Rua das Peças, 123 - Centro<br>São Paulo - SP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Horário de Funcionamento</h3>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Segunda a Sexta:</span>
+                            <span class="text-gray-800 font-medium">8:00 - 18:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Sábado:</span>
+                            <span class="text-gray-800 font-medium">8:00 - 12:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Domingo:</span>
+                            <span class="text-gray-800 font-medium">Fechado</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <a href="https://wa.me/5511999999999" target="_blank"
+                           class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg text-center font-semibold transition-colors flex items-center justify-center space-x-2">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Falar no WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-1 text-white text-base">
+                <span class="text-center">&copy; 2025 Fênix Equipamentos e Produtos Automotivos.</span>
+                <div class="flex items-center gap-1">
+                    <span>Produzido por:</span>
+                    <img src="imagens/footerj3.png" alt="J3 Digital Mídia" class="h-8">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/5511999999999" target="_blank" 
+       class="whatsapp-float fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full flex items-center space-x-2 shadow-lg z-40 transition-colors">
+        <i class="fab fa-whatsapp text-lg"></i>
+        <span class="font-semibold text-sm">Entre em Contato</span>
+    </a>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Inicializar Carrossel Swiper Simples
+        document.addEventListener('DOMContentLoaded', function() {
+            const swiper = new Swiper('.simple-carousel', {
+                // Configuração básica para slide lateral
+                slidesPerView: 1,
+                spaceBetween: 0,
+                loop: true,
+                grabCursor: true,
+                
+                // Autoplay
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                
+                // Efeito de transição suave
+                effect: 'slide',
+                speed: 800,
+                
+                // Navegação
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                
+                // Paginação
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+                
+                // Configurações responsivas
+                breakpoints: {
+                    // Todas as telas mantêm 1 slide por vez
+                    320: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 1,
+                    },
+                    1024: {
+                        slidesPerView: 1,
+                    }
+                }
+            });
+        });
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fechar menu mobile ao clicar fora dele
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('[onclick="toggleMobileMenu()"]');
+            
+            if (!mobileMenu.contains(e.target) && !menuButton.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Animação dos cards ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Aplicar animação aos cards de produto
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
