@@ -124,7 +124,6 @@
                 <div class="hidden md:flex space-x-8">
                     <a href="#home" class="text-gray-300 hover:text-blue-400 font-medium transition-colors">Home</a>
                     <a href="#sobre" class="text-gray-300 hover:text-blue-400 font-medium transition-colors">Sobre</a>
-                    <a href="#produtos" class="text-gray-300 hover:text-blue-400 font-medium transition-colors">Produtos</a>
                     <a href="#contato" class="text-gray-300 hover:text-blue-400 font-medium transition-colors">Contato</a>
                 </div>
 
@@ -157,7 +156,6 @@
             <nav class="p-4">
                 <a href="#home" class="block py-3 text-gray-700 border-b" onclick="toggleMobileMenu()">Home</a>
                 <a href="#sobre" class="block py-3 text-gray-700 border-b" onclick="toggleMobileMenu()">Sobre</a>
-                <a href="#produtos" class="block py-3 text-gray-700 border-b" onclick="toggleMobileMenu()">Produtos</a>
                 <a href="#contato" class="block py-3 text-gray-700 border-b" onclick="toggleMobileMenu()">Contato</a>
                 <a href="https://wa.me/5513991884412" target="_blank" 
                    class="block mt-4 bg-green-500 text-white text-center py-3 rounded-lg">
@@ -251,15 +249,15 @@
             <!-- Mobile: Apenas ícones com tooltips -->
             <div class="flex justify-center items-center gap-4 md:hidden text-white">
                 <div class="relative group">
-                    <i class="fas fa-oil-can text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
+                    <i class="fas fa-gas-pump text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
                     <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
-                        Óleos e Lubrificantes
+                        Produtos Para o Posto
                     </div>
                 </div>
                 <div class="relative group">
-                    <i class="fas fa-car-battery text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
+                    <i class="fas fa-oil-can text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
                     <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
-                        Baterias
+                        Óleos e Lubrificantes
                     </div>
                 </div>
                 <div class="relative group">
@@ -281,12 +279,6 @@
                     </div>
                 </div>
                 <div class="relative group">
-                    <i class="fas fa-car-crash text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
-                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
-                        Freios
-                    </div>
-                </div>
-                <div class="relative group">
                     <i class="fas fa-filter text-lg hover:text-yellow-300 transition-colors cursor-pointer"></i>
                     <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
                         Filtros
@@ -304,14 +296,14 @@
             <div class="hidden md:flex flex-wrap justify-center items-center gap-6 md:gap-8 text-white text-sm md:text-base">
                 <!-- Produto 1 -->
                 <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
-                    <i class="fas fa-oil-can text-lg"></i>
-                    <span class="font-medium">Óleos e Lubrificantes</span>
+                    <i class="fas fa-gas-pump text-lg"></i>
+                    <span class="font-medium">Produtos Para o Posto</span>
                 </div>
                 
                 <!-- Produto 2 -->
                 <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
-                    <i class="fas fa-car-battery text-lg"></i>
-                    <span class="font-medium">Baterias</span>
+                    <i class="fas fa-oil-can text-lg"></i>
+                    <span class="font-medium">Óleos e Lubrificantes</span>
                 </div>
                 
                 <!-- Produto 3 -->
@@ -330,12 +322,6 @@
                 <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
                     <i class="fas fa-tools text-lg"></i>
                     <span class="font-medium">Ferramentas</span>
-                </div>
-                
-                <!-- Produto 6 -->
-                <div class="flex items-center space-x-2 hover:text-yellow-300 transition-colors cursor-pointer">
-                    <i class="fas fa-car-crash text-lg"></i>
-                    <span class="font-medium">Freios</span>
                 </div>
                 
                 <!-- Produto 7 -->
@@ -376,7 +362,7 @@
         </div>
     </section>
 
-    <!-- Seção Produtos em Destaque -->
+    <!-- Seção Produtos -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -1669,6 +1655,150 @@
         </div>
     </section>
 
+    <!-- Seção EPIs -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-red-600 mb-4">EPIs</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Produto 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs font-bold rounded">
+                            DESTAQUE
+                        </div>
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/EPIs/bota.png" alt="Bota de Segurança" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Bota de PVC Bracol
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: EPI-BOTA-AÇO</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/EPIs/botina.png" alt="Botina de Segurança" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Botina de Segurança com Biqueira de Aço
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: EPI-BOTINA-AÇO</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/EPIs/luvapvc.png" alt="Luva de PVC" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Luva de PVC Reforçada para Trabalho
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: EPI-LUVA-PVC</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/EPIs/oculos.png" alt="Óculos de Proteção" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Óculos de Proteção Individual - EPI
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: EPI-OCULOS</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                    <div class="relative">
+                        <div class="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="far fa-heart text-lg"></i>
+                        </div>
+                        <img src="imagens/EPIs/protetor.png" alt="Protetor Auditivo" class="w-full h-48 object-contain hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-2 leading-tight">
+                            Protetor Auditivo Tipo Concha - EPI
+                        </h3>
+                        <p class="text-xs text-gray-600 mb-2">CÓDIGO: EPI-PROT-AUD</p>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <p class="text-green-600 font-medium">Consulte o preço</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Seção Sobre -->
     <section id="sobre" class="py-16 bg-white">
         <div class="container mx-auto px-4">
@@ -1703,68 +1833,6 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">Atendimento Especializado</h3>
                     <p class="text-gray-600">Equipe técnica qualificada para orientá-lo</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção Produtos -->
-    <section id="produtos" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nossos Produtos</h2>
-                <p class="text-xl text-gray-600">
-                    Tudo que você precisa para manter seu veículo em perfeito estado
-                </p>
-            </div>
-
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Categoria 1 -->
-                <div class="product-card bg-white rounded-xl p-6 text-center shadow-lg">
-                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-oil-can text-3xl text-blue-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Óleos e Lubrificantes</h3>
-                    <p class="text-gray-600 mb-4">Óleos para motor, câmbio, direção hidráulica e freios</p>
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
-                        Ver Produtos
-                    </button>
-                </div>
-
-                <!-- Categoria 2 -->
-                <div class="product-card bg-white rounded-xl p-6 text-center shadow-lg">
-                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-car-battery text-3xl text-green-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Baterias</h3>
-                    <p class="text-gray-600 mb-4">Baterias automotivas de alta durabilidade e performance</p>
-                    <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-colors">
-                        Ver Produtos
-                    </button>
-                </div>
-
-                <!-- Categoria 3 -->
-                <div class="product-card bg-white rounded-xl p-6 text-center shadow-lg">
-                    <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-cog text-3xl text-orange-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Peças e Componentes</h3>
-                    <p class="text-gray-600 mb-4">Peças originais e paralelas para todos os veículos</p>
-                    <button class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg transition-colors">
-                        Ver Produtos
-                    </button>
-                </div>
-
-                <!-- Categoria 4 -->
-                <div class="product-card bg-white rounded-xl p-6 text-center shadow-lg">
-                    <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-tools text-3xl text-red-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Ferramentas</h3>
-                    <p class="text-gray-600 mb-4">Ferramentas profissionais para oficinas e uso doméstico</p>
-                    <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-colors">
-                        Ver Produtos
-                    </button>
                 </div>
             </div>
         </div>
@@ -1805,7 +1873,7 @@
                         <div class="flex items-center justify-center mb-3">
                             <i class="fas fa-phone text-amber-400 mr-2 text-lg"></i>
                             <a href="tel:13991884412" class="text-white hover:text-amber-400 transition-colors text-base md:text-lg">
-                                (13) 99188-4412
+                                (13) 99188-4412 / (13) 99124-4940
                             </a>
                         </div>
                     </div>
@@ -1972,5 +2040,6 @@
     </script>
 </body>
 </html>
+
 
 
